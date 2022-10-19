@@ -72,7 +72,7 @@
                             Java).<br>I take time in self-learning of technologies that are trending in software
                             development and project management.<br>I have worked on projects informally as part of my
                             professional career subjects and a separate project with a team.</p>
-                        <div style="text-align: initial;"><button id="btndown" class="btn btn-outline-light text-start" type="button"
+                        <div style="text-align: initial;"><button id="btndown"  class="btn btn-outline-light text-start" type="button" onclick="DownloadFile('CV.pdf')"
                                 style="width: 182.328px;"><i class="fa fa-download"></i>&nbsp; Download my
                                 CV&nbsp;</button></div>
                     </div>
@@ -437,26 +437,22 @@
             $('html, body').animate({
                 scrollTop: $("#sect1").offset().top
             }, 100);
-            // $( "#abme").scroll();
         });
         $("#nav3").click(function () {
 
             $('html, body').animate({
                 scrollTop: $("#prob").offset().top + $("#prob")[0].scrollHeight - 50
             }, 100);
-            // $( ".block-intro" ).scroll();
         });
         $("#nav4").click(function () {
             $('html, body').animate({
                 scrollTop: $("#secthob").offset().top + $("#secthob")[0].scrollHeight - 50
             }, 100);
-            // $( ".block-intro" ).scroll();
         });
         $("#nav5").click(function () {
             $('html, body').animate({
                 scrollTop: $("#sect3").offset().top + $("#sect3")[0].scrollHeight - 50
             }, 100);
-            // $( ".block-intro" ).scroll();
         });
         $("#esp").click(function () {
             $("#nav1").html('Inicio');
@@ -525,6 +521,38 @@
             $("#descproj3").html(textdesc3);
             $("#footersoc").html('Social Media');
         });
+    </script>
+        
+            <script type="text/javascript">
+        function DownloadFile(fileName) {
+            //Set the File URL.
+            var url = "Files/" + fileName;
+ 
+            //Create XMLHTTP Request.
+            var req = new XMLHttpRequest();
+            req.open("GET", url, true);
+            req.responseType = "blob";
+            req.onload = function () {
+                //Convert the Byte Data to BLOB object.
+                var blob = new Blob([req.response], { type: "application/octetstream" });
+ 
+                //Check the Browser type and download the File.
+                var isIE = false || !!document.documentMode;
+                if (isIE) {
+                    window.navigator.msSaveBlob(blob, fileName);
+                } else {
+                    var url = window.URL || window.webkitURL;
+                    link = url.createObjectURL(blob);
+                    var a = document.createElement("a");
+                    a.setAttribute("download", fileName);
+                    a.setAttribute("href", link);
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
+            };
+            req.send();
+        };
     </script>
 
 </body>
